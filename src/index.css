@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+header, header * {
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+@keyframes phone-vibrate {
+  0%   { transform: scale(1) rotate(0deg); }
+  10%  { transform: scale(1.2) rotate(-15deg); }
+  20%  { transform: scale(1.2) rotate(15deg); }
+  30%  { transform: scale(1.2) rotate(-10deg); }
+  40%  { transform: scale(1.2) rotate(10deg); }
+  50%  { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.phone-ring {
+  animation: phone-vibrate 2.5s ease-in-out infinite;
+  transform-origin: center;
+  display: inline-block;
+}
