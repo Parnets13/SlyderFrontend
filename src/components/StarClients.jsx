@@ -15,61 +15,48 @@ const FALLBACK = [
   { _id: '5', _local: hotel11 },
 ]
 
-function HotelsSection() {
-  const [hotels, setHotels] = useState(FALLBACK)
+function StarClients() {
+  const [clients, setClients] = useState(FALLBACK)
 
   useEffect(() => {
-    fetch(`${BASE_URL}/api/hotels`)
+    fetch(`${BASE_URL}/api/star-clients`)
       .then(r => r.json())
-      .then(data => { if (Array.isArray(data) && data.length > 0) setHotels(data) })
+      .then(data => { if (Array.isArray(data) && data.length > 0) setClients(data) })
       .catch(() => {})
   }, [])
 
-  const imgFor = (h) => h._local ? h._local : `${BASE_URL}/uploads/hotels/${h.image}`
+  const imgFor = (h) => h._local ? h._local : `${BASE_URL}/uploads/star-clients/${h.image}`
 
-  // Duplicate for seamless infinite scroll
-  const track = [...hotels, ...hotels, ...hotels]
+  const track = [...clients, ...clients, ...clients]
 
   return (
-    <section className="py-16 px-4 overflow-hidden" style={{ background: '#f8fafc' }}>
+    <section className="py-16 px-4 overflow-hidden" style={{ background: '#fff' }}>
       <div className="max-w-7xl mx-auto">
-
-        {/* Header */}
         <div className="text-center mb-12">
-          <span
-            className="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4"
-            style={{ background: 'rgba(21,156,72,0.08)', color: '#159c48', border: '1px solid rgba(21,156,72,0.2)' }}
-          >
-            Our Clients
-          </span>
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-            Approved by{' '}
+            Our{' '}
             <span style={{
               background: 'linear-gradient(135deg, #159c48, #4ade80)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             }}>
-         
+              Star Clients
             </span>
           </h2>
           <div className="w-14 h-1 rounded-full mx-auto mt-4" style={{ backgroundColor: '#159c48' }} />
           <p className="text-gray-500 mt-4 text-base max-w-md mx-auto">
-            Leading hotels across India trust Slyder for their security needs.
+            Proud to serve some of the finest names in hospitality across India.
           </p>
         </div>
-
       </div>
 
-      {/* Infinite scroll track — full width */}
       <div className="relative">
-        {/* Left fade */}
         <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-          style={{ background: 'linear-gradient(to right, #f8fafc, transparent)' }} />
-        {/* Right fade */}
+          style={{ background: 'linear-gradient(to right, #fff, transparent)' }} />
         <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-          style={{ background: 'linear-gradient(to left, #f8fafc, transparent)' }} />
+          style={{ background: 'linear-gradient(to left, #fff, transparent)' }} />
 
-        <div className="hotels-track flex gap-8 items-center">
+        <div className="star-clients-track flex gap-8 items-center">
           {track.map((h, i) => (
             <div
               key={i}
@@ -78,7 +65,7 @@ function HotelsSection() {
             >
               <img
                 src={imgFor(h)}
-                alt="Hotel"
+                alt="Client"
                 className="w-full h-full transition-all duration-300"
                 onMouseEnter={e => e.currentTarget.style.filter = 'grayscale(0%)'}
                 onMouseLeave={e => e.currentTarget.style.filter = 'grayscale(20%)'}
@@ -90,20 +77,20 @@ function HotelsSection() {
       </div>
 
       <style>{`
-        .hotels-track {
-          animation: scroll-hotels 22s linear infinite;
+        .star-clients-track {
+          animation: scroll-star-clients 22s linear infinite;
           width: max-content;
         }
-        .hotels-track:hover {
+        .star-clients-track:hover {
           animation-play-state: paused;
         }
-        @keyframes scroll-hotels {
+        @keyframes scroll-star-clients {
           0%   { transform: translateX(0); }
-          100% { transform: translateX(calc(-200px * ${hotels.length} - 32px * ${hotels.length})); }
+          100% { transform: translateX(calc(-200px * ${clients.length} - 32px * ${clients.length})); }
         }
       `}</style>
     </section>
   )
 }
 
-export default HotelsSection
+export default StarClients

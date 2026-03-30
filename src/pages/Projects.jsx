@@ -17,7 +17,7 @@ import img15 from '../assets/pro1.jpeg'
 import img16 from '../assets/pro2.jpeg'
 import img17 from '../assets/pro3.jpeg'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '')
 const fallbackImages = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img15, img16, img17]
 
 const galleryStyles = `

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { MapPin, Phone, Mail, Globe } from 'lucide-react'
 import heroBg from '../assets/8hotel.jpg'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '')
 
 const iconAnimations = `
   @keyframes iconPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.22)} }
@@ -61,9 +61,13 @@ function Contact() {
     if (!form.name || !form.email || !form.message) return
     setStatus('sending')
     try {
+      const controller = new AbortController()
+      const timeout = setTimeout(() => controller.abort(), 15000)
       const res = await fetch(`${BASE_URL}/api/contact/message`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form),
+        signal: controller.signal,
       })
+      clearTimeout(timeout)
       const data = await res.json()
       if (data.success) { setStatus('success'); setForm(BLANK) } else setStatus('error')
     } catch { setStatus('error') }

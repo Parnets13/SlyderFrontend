@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Plus, Pencil, Trash2, X, Check, ImageIcon, PlusCircle, MinusCircle } from 'lucide-react'
 import { getFeaturedProducts, createFeaturedProduct, updateFeaturedProduct, deleteFeaturedProduct } from '../api'
 
-const API_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace('/api', '')
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '')
 const imgSrc = (filename) => `${API_URL}/uploads/featured/${filename}`
 
 const BLANK = { name: '', descType: 'bullets', description: [''], specs: [{ spec: '', desc: '' }] }

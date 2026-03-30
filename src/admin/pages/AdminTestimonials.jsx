@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Plus, Pencil, Trash2, X, Check, ImageIcon } from 'lucide-react'
 import { getTestimonials, createTestimonial, updateTestimonial, deleteTestimonial } from '../api'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '')
 const inp = 'w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg bg-white text-gray-900 outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500'
 const ta  = `${inp} resize-y`
 const BLANK = { role: '', hotel: '', text: '', rating: 5 }

@@ -12,7 +12,7 @@ import img8 from '../assets/cor3.png'
 
 const BASE_URL = import.meta.env.VITE_API_URL
   ? import.meta.env.VITE_API_URL.replace(/\/api$/, '')
-  : 'https://slyderind.onrender.com'
+  : 'http://localhost:5000'
 
 const FALLBACK = [
   { _id: '1', name: 'Slyder Hotel Lock', _local: img1, specs: [{ spec: 'Technology', desc: 'RFID & Bluetooth' }, { spec: 'Origin', desc: '100% Made in India' }, { spec: 'Alert System', desc: 'Real-time Transaction Alerts' }, { spec: 'Management', desc: 'Cloud-based Software' }] },
@@ -73,7 +73,7 @@ function LocksAccessories() {
       {/* Cards */}
       <div style={{ width: '90%', margin: '0 auto' }}>
         {products.map((p, i) => (
-          <div key={p._id} style={{ position: 'sticky', top: 60 + i * 12, zIndex: i + 1 }}>
+          <div key={p._id} className="product-sticky-wrapper" style={{ position: 'sticky', top: 60 + i * 12, zIndex: i + 1 }}>
             <ProductCard product={p} imgSrc={imgSrc(p)} index={i} />
           </div>
         ))}
@@ -83,8 +83,9 @@ function LocksAccessories() {
       <style>{`
         @media (max-width: 640px) {
           .product-card-grid { grid-template-columns: 1fr !important; height: auto !important; min-height: unset !important; max-height: unset !important; }
-          .product-card-img { height: 240px !important; order: 0 !important; }
-          .product-card-content { order: 1 !important; padding: 28px 24px !important; }
+          .product-card-img { height: 220px !important; order: 0 !important; }
+          .product-card-content { order: 1 !important; padding: 24px 20px !important; }
+          .product-sticky-wrapper { position: static !important; }
         }
       `}</style>
     </section>
@@ -104,7 +105,7 @@ function ProductCard({ product, imgSrc, index }) {
         borderRadius: 24, overflow: 'hidden',
         background: dark ? '#0f172a' : '#fff',
         boxShadow: '0 8px 48px rgba(0,0,0,0.10)',
-        border: `1px solid ${dark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'}`,
+        border: dark ? 'none' : '1px solid rgba(0,0,0,0.05)',
         height: '70vh', minHeight: 340, maxHeight: 580,
       }}
     >

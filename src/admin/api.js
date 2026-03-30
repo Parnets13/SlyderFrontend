@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
 })
 
 api.interceptors.request.use((config) => {
@@ -75,7 +75,7 @@ export const deleteDistributorApp           = (id)   => api.delete(`/become-dist
 export const getProjects   = ()   => api.get('/projects').then(r => r.data)
 export const createProject = (fd) => {
   const token = localStorage.getItem('slyder_admin_token')
-  return axios.post(`${import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api'}/projects`, fd, {
+  return axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/projects`, fd, {
     headers: { Authorization: `Bearer ${token}` }
   }).then(r => r.data)
 }
@@ -85,7 +85,7 @@ export const deleteProject = (id) => api.delete(`/projects/${id}`).then(r => r.d
 export const getDistributor    = ()   => api.get('/distributor').then(r => r.data)
 export const updateDistributor = (fd) => {
   const token = localStorage.getItem('slyder_admin_token')
-  return axios.put(`${import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api'}/distributor`, fd, {
+  return axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/distributor`, fd, {
     headers: { Authorization: `Bearer ${token}` }
   }).then(r => r.data)
 }
@@ -97,7 +97,7 @@ export const deleteAboutSection = (id)       => api.delete(`/about/sections/${id
 export const getAboutFounder   = ()   => api.get('/about/founder').then(r => r.data)
 export const updateAboutFounder= (fd) => {
   const token = localStorage.getItem('slyder_admin_token')
-  return axios.put(`${import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api'}/about/founder`, fd, {
+  return axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/about/founder`, fd, {
     headers: { Authorization: `Bearer ${token}` }
   }).then(r => r.data)
 }
@@ -120,3 +120,9 @@ export const getVideos   = ()             => api.get('/videos').then(r => r.data
 export const createVideo = (formData)     => api.post('/videos', formData).then(r => r.data)
 export const updateVideo = (id, formData) => api.put(`/videos/${id}`, formData).then(r => r.data)
 export const deleteVideo = (id)           => api.delete(`/videos/${id}`).then(r => r.data)
+
+// ─── Star Clients ─────────────────────────────────────────
+export const getStarClients   = ()             => api.get('/star-clients').then(r => r.data)
+export const createStarClient = (formData)     => api.post('/star-clients', formData).then(r => r.data)
+export const updateStarClient = (id, formData) => api.put(`/star-clients/${id}`, formData).then(r => r.data)
+export const deleteStarClient = (id)           => api.delete(`/star-clients/${id}`).then(r => r.data)

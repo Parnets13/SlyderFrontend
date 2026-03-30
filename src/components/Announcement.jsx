@@ -31,18 +31,10 @@ function Announcement() {
           width: 100%;
           overflow: hidden;
           margin-top: 32px;
-          background: linear-gradient(-45deg, #ee7752, #23a6d5, #23d5ab, #764ba2);
-          background-size: 400% 400%;
-          animation: gradientShift 10s ease infinite;
-          border-top: 1px solid rgba(255,255,255,0.25);
-          border-bottom: 1px solid rgba(255,255,255,0.15);
-          box-shadow: 0 6px 40px rgba(0,0,0,0.25);
-        }
-
-        @keyframes gradientShift {
-          0%   { background-position: 0% 50%; }
-          50%  { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
+          background: #001f5b;
+          border-top: 1px solid rgba(255,255,255,0.1);
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+          box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
 
         .announcement-track {
@@ -59,15 +51,13 @@ function Announcement() {
         }
 
         .announcement-text {
-          font-size: 32px;
-          font-weight: 900;
+          font-size: 17px;
+          font-weight: 600;
           letter-spacing: 0.05em;
           font-family: 'Segoe UI', system-ui, sans-serif;
-          padding: 22px 0;
-          color: #fff;
-          text-shadow:
-            0 2px 12px rgba(0,0,0,0.3),
-            0 0 40px rgba(255,255,255,0.15);
+          padding: 10px 0;
+          color: #001f5b;
+          background: #e8edf7;
         }
 
         @keyframes ticker {
@@ -76,7 +66,7 @@ function Announcement() {
         }
 
         @media (max-width: 640px) {
-          .announcement-text { font-size: 22px; padding: 16px 0; }
+          .announcement-text { font-size: 14px; padding: 8px 0; }
         }
       `}</style>
     </div>

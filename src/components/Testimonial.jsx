@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '')
 
 const FALLBACK = [
   {
@@ -29,9 +29,9 @@ const AVATAR_COLORS = ['#94a3b8', '#64748b', '#cbd5e1', '#475569']
 
 function Stars({ count = 5 }) {
   return (
-    <div style={{ display: 'flex', gap: 6, justifyContent: 'center', marginBottom: 32 }}>
+    <div style={{ display: 'flex', gap: 6, justifyContent: 'center', marginBottom: 28 }}>
       {[...Array(5)].map((_, i) => (
-        <svg key={i} width="28" height="28" viewBox="0 0 24 24" fill={i < count ? '#f59e0b' : '#d1d5db'}>
+        <svg key={i} width="24" height="24" viewBox="0 0 24 24" fill={i < count ? '#f59e0b' : 'rgba(255,255,255,0.2)'}>
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
         </svg>
       ))}
@@ -48,7 +48,7 @@ function Avatar({ t, i, active, onClick }) {
         width: active ? 52 : 44,
         height: active ? 52 : 44,
         borderRadius: '50%',
-        border: active ? '3px solid #fff' : '2px solid #e2e8f0',
+        border: active ? '3px solid rgba(255,255,255,0.9)' : '2px solid rgba(255,255,255,0.25)',
         background: AVATAR_COLORS[i % AVATAR_COLORS.length],
         cursor: 'pointer',
         display: 'flex',
@@ -70,7 +70,7 @@ function Avatar({ t, i, active, onClick }) {
       aria-label={t.author}
     >
       {imgSrc
-        ? <img src={imgSrc} alt={t.author} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', filter: active ? 'none' : 'grayscale(100%)', transition: 'filter 0.3s ease' }} />
+        ? <img src={imgSrc} alt={t.author} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', filter: active ? 'none' : 'grayscale(60%)', transition: 'filter 0.3s ease' }} />
         : (t.author?.slice(0, 2).toUpperCase())
       }
     </button>
@@ -107,30 +107,131 @@ function Testimonial() {
   const t = items[active]
 
   return (
-    <section style={{ background: '#fff', padding: '100px 24px' }}>
-      <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'center' }}>
+    <section style={{
+      padding: '100px 24px',
+      background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f2a1a 100%)',
+      position: 'relative',
+      overflow: 'hidden',
+    }}>
+
+      {/* Background blobs */}
+      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+        <div style={{
+          position: 'absolute', top: '-20%', left: '-10%',
+          width: 500, height: 500, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(21,156,72,0.18) 0%, transparent 70%)',
+        }} />
+        <div style={{
+          position: 'absolute', bottom: '-20%', right: '-10%',
+          width: 600, height: 600, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(21,156,72,0.12) 0%, transparent 70%)',
+        }} />
+        <div style={{
+          position: 'absolute', top: '40%', left: '50%', transform: 'translate(-50%,-50%)',
+          width: 400, height: 400, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%)',
+        }} />
+      </div>
+
+      {/* Section label */}
+      <div style={{ textAlign: 'center', marginBottom: 48, position: 'relative', zIndex: 1 }}>
+        <span style={{
+          display: 'inline-block', fontSize: 11, fontWeight: 800,
+          letterSpacing: '0.2em', textTransform: 'uppercase',
+          padding: '6px 18px', borderRadius: 100,
+          background: 'rgba(21,156,72,0.15)',
+          border: '1px solid rgba(21,156,72,0.35)',
+          color: '#4ade80',
+          backdropFilter: 'blur(8px)',
+        }}>
+          What Our Clients Say
+        </span>
+      </div>
+
+      {/* Glass card */}
+      <div style={{
+        maxWidth: 780, margin: '0 auto', position: 'relative', zIndex: 1,
+        background: 'rgba(255,255,255,0.06)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        border: '1px solid rgba(255,255,255,0.12)',
+        borderRadius: 28,
+        padding: 'clamp(36px, 5vw, 64px) clamp(28px, 5vw, 72px)',
+        boxShadow: '0 8px 64px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1)',
+        textAlign: 'center',
+      }}>
+
+        {/* Quote icon */}
+        <div style={{ marginBottom: 20 }}>
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style={{ opacity: 0.25 }}>
+            <text x="0" y="36" fontSize="52" fill="white" fontFamily="Georgia, serif">"</text>
+          </svg>
+        </div>
+
         <Stars count={t.rating ?? 5} />
+
         <p style={{
           margin: '0 0 36px',
-          fontSize: 'clamp(20px, 2.4vw, 28px)',
-          fontWeight: 700, lineHeight: 1.55, color: '#0f172a', letterSpacing: '-0.01em',
+          fontSize: 'clamp(17px, 2.2vw, 24px)',
+          fontWeight: 500,
+          lineHeight: 1.7,
+          color: 'rgba(255,255,255,0.88)',
+          letterSpacing: '-0.01em',
+          fontStyle: 'italic',
           opacity: fading ? 0 : 1,
-          transform: fading ? 'translateY(8px)' : 'translateY(0)',
+          transform: fading ? 'translateY(10px)' : 'translateY(0)',
           transition: 'opacity 0.28s ease, transform 0.28s ease',
         }}>
           "{t.quote || t.text}"
         </p>
+
+        {/* Divider */}
+        <div style={{
+          width: 48, height: 2, borderRadius: 2,
+          background: 'linear-gradient(90deg, transparent, #159c48, transparent)',
+          margin: '0 auto 28px',
+        }} />
+
         <p style={{
-          margin: '0 0 32px', fontSize: 15, color: '#64748b', fontWeight: 500,
-          opacity: fading ? 0 : 1, transition: 'opacity 0.28s ease',
+          margin: '0 0 32px',
+          fontSize: 14,
+          color: 'rgba(255,255,255,0.55)',
+          fontWeight: 600,
+          letterSpacing: '0.03em',
+          textTransform: 'uppercase',
+          opacity: fading ? 0 : 1,
+          transition: 'opacity 0.28s ease',
         }}>
-          {t.author || t.hotel}{t.role ? `, ${t.role}` : ''}
+          {t.author || t.hotel}{t.role ? ` · ${t.role}` : ''}
         </p>
+
+        {/* Avatars */}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           {items.map((item, i) => (
             <Avatar key={i} t={item} i={i} active={i === active} onClick={() => goTo(i)} />
           ))}
         </div>
+      </div>
+
+      {/* Dot indicators */}
+      <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 32, position: 'relative', zIndex: 1 }}>
+        {items.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            style={{
+              width: i === active ? 24 : 8,
+              height: 8,
+              borderRadius: 4,
+              border: 'none',
+              cursor: 'pointer',
+              padding: 0,
+              background: i === active ? '#159c48' : 'rgba(255,255,255,0.2)',
+              transition: 'all 0.3s ease',
+            }}
+            aria-label={`Go to testimonial ${i + 1}`}
+          />
+        ))}
       </div>
     </section>
   )

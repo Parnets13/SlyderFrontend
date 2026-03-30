@@ -1,13 +1,13 @@
 import { useState, useRef, useCallback, useMemo, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Lock, ChevronDown, Menu, X, PhoneCall } from 'lucide-react'
+
 
 import batteryImg from '../assets/battery-1.jpeg'
 import brochureImg from '../assets/Brochure.png'
 import templateImg from '../assets/template.jpeg'
-import slyder from '../assets/logo-removebg-preview.png'
+import slyder from '../assets/7.png'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace('/api', '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '')
 
 const downloadItems = [
   { label: 'Battery', href: batteryImg, filename: 'Battery.jpeg' },
@@ -17,14 +17,26 @@ const downloadItems = [
 
 const navLinks = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Distributor Network', href: '/distributors' },
   { label: 'Our Products', href: '/products', hasDropdown: true, dropdownType: 'products' },
-  { label: 'Projects', href: '/projects' },
+   { label: 'Projects', href: '/projects' },
+  { label: 'About Us', href: '/about' },
   { label: 'Contact', href: '/contact' },
-  { label: 'Download', href: '/download', hasDropdown: true, dropdownType: 'download' },
-  { label: 'Become Distributor', href: '/become-distributor' },
+   { label: 'Download', href: '/download', hasDropdown: true, dropdownType: 'download' }, 
+   {
+  label: 'Distributor',
+  hasDropdown: true,
+  dropdownType: 'distributor'
+},
+  //  { label: 'Become Distributor', href: '/become-distributor' },
+  // { label: 'Distributor Network', href: '/distributors' },
+  
+ 
+  
+ 
+  
 ]
+import { Lock, ChevronDown, Menu, X, PhoneCall } from 'lucide-react' 
+
 
 // Extracted ProductDropdown component for better organization
 const ProductDropdown = ({ isOpen, onClose, productItems }) => {
@@ -111,7 +123,34 @@ const DownloadDropdown = ({ isOpen }) => {
     </div>
   )
 }
+const DistributorDropdown = ({ isOpen }) => {
+  if (!isOpen) return null
 
+  return (
+    <div className="absolute top-full left-1/2 mt-4 z-50 w-56 -translate-x-1/2">
+      {/* Arrow */}
+      <div className="flex justify-center mb-[-6px]">
+        <div className="w-3 h-3 rotate-45 border-l border-t border-white/30 bg-white/15" />
+      </div>
+
+      <div className="rounded-2xl overflow-hidden backdrop-blur-2xl bg-slate-900/75 border border-white/10 shadow-2xl py-2">
+        <Link
+          to="/become-distributor"
+          className="block px-5 py-3 text-sm font-medium text-white/85 hover:bg-white/10"
+        >
+          Become Distributor
+        </Link>
+
+        <Link
+          to="/distributors"
+          className="block px-5 py-3 text-sm font-medium text-white/85 hover:bg-white/10"
+        >
+          Distributor Network
+        </Link>
+      </div>
+    </div>
+  )
+}
 const MobileNavItem = ({ link, productItems, downloadItems, onLinkClick }) => {
   const [isOpen, setIsOpen] = useState(false)
   const { pathname } = useLocation()
@@ -176,7 +215,8 @@ const MobileNavItem = ({ link, productItems, downloadItems, onLinkClick }) => {
   )
 }
 
-function Header() {
+function Header() { 
+  const [distributorOpen, setDistributorOpen] = useState(false) 
   const [menuOpen, setMenuOpen] = useState(false)
   const [productsOpen, setProductsOpen] = useState(false)
   const [downloadOpen, setDownloadOpen] = useState(false)
@@ -231,7 +271,13 @@ function Header() {
   const handleMobileMenuClose = useCallback(() => {
     setMenuOpen(false)
   }, [])
+const handleDistributorEnter = useCallback(() => {
+  setDistributorOpen(true)
+}, [])
 
+const handleDistributorLeave = useCallback(() => {
+  setTimeout(() => setDistributorOpen(false), 150)
+}, [])
   // Memoized styles to prevent recalculation
   const headerStyle = useMemo(() => (isSolid ? {
     background: 'rgba(255, 255, 255, 0.95)',
@@ -260,7 +306,7 @@ function Header() {
               <img
                 src={slyder}
                 alt="Slyder"
-                className={`w-auto object-contain transition-all duration-300 ${isSolid ? 'h-9 md:h-14' : 'h-12 md:h-20 brightness-0 invert'}`}
+                className={`w-auto object-contain  ${isSolid ? 'h-8 md:h-12' : 'h-11 md:h-18'}`}
                 loading="eager"
               />
             </a>
@@ -270,7 +316,7 @@ function Header() {
           <nav className="hidden md:flex flex-1 items-center justify-evenly">
             {navLinks.map((link) => {
               const navItemStyle = { color: isSolid ? '#374151' : '#ffffff' }
-              const navClass = "relative font-extrabold text-lg transition-all duration-200 group whitespace-nowrap"
+              const navClass = "relative font-extrabold text-base transition-all duration-200 group whitespace-nowrap"
 
               if (link.hasDropdown && link.dropdownType === 'products') {
                 return (
@@ -296,7 +342,34 @@ function Header() {
                     <DownloadDropdown isOpen={downloadOpen} />
                   </div>
                 )
-              }
+              } 
+              if (link.hasDropdown && link.dropdownType === 'distributor') {
+  return (
+    <div
+      key={link.label}
+      className="relative"
+      onMouseEnter={handleDistributorEnter}
+      onMouseLeave={handleDistributorLeave}
+    >
+      <button
+        className={`${navClass} flex items-center gap-1`}
+        style={navItemStyle}
+      >
+        {link.label}
+        <ChevronDown
+          size={15}
+          className={`transition-transform duration-200 ${
+            distributorOpen ? 'rotate-180' : ''
+          }`}
+        />
+        <span className="absolute -bottom-0.5 left-0 w-0 h-1 bg-white transition-all duration-200 group-hover:w-full" />
+      </button>
+
+      {/* 🔥 THIS WAS MISSING */}
+      <DistributorDropdown isOpen={distributorOpen} />
+    </div>
+  )
+}
 
               return (
                 <Link key={link.label} to={link.href} className={navClass} style={navItemStyle}>
@@ -312,11 +385,11 @@ function Header() {
             <a
               href="tel:+919845670055"
               className="flex items-center gap-4 font-bold transition-colors"
-              style={{ color: isSolid ? '#159c48' : '#fff', fontSize: '1.4rem' }}
+              style={{ color: isSolid ? '#159c48' : '#fff', fontSize: '1 rem' }}
               onMouseEnter={e => e.currentTarget.style.color = '#117a38'}
               onMouseLeave={e => e.currentTarget.style.color = isSolid ? '#159c48' : '#fff'}
             >
-              <PhoneCall size={28} className="phone-ring" />
+              <PhoneCall size={20} className="phone-ring" />
               9845670055
             </a>
           </div>

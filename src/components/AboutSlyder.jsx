@@ -60,7 +60,7 @@ function StatCard({ s, i, started }) {
   )
 }
 
-const API_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api')
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api')
 
 const DEFAULTS = {
   heading: 'Welcome To',
@@ -108,12 +108,12 @@ function AboutSlyder() {
 
   return (
     <section style={{ background: '#0f172a', padding: '80px 0', overflow: 'hidden', position: 'relative' }}>
-      <div style={{ position: 'absolute', top: '-100px', left: '-100px', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(21,156,72,0.15) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
-      <div style={{ position: 'absolute', bottom: '-80px', right: '-80px', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(21,156,72,0.1) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', top: '-100px', left: '-100px', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(10,24,58,1.05) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', bottom: '-80px', right: '-80px', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(10,24,58,1.1) 0%, transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none' }} />
 
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 20px', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 48 }}>
-          <div style={{ width: 40, height: 2, background: '#159c48', borderRadius: 2 }} />
+          <div style={{ width: 40, height: 2, background: '#002147', borderRadius: 2 }} />
           <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#159c48' }}>
             About Slyder Electronics
           </span>

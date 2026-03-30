@@ -8,7 +8,7 @@ import cor2 from '../assets/cor2.jpg'
 import cor1 from '../assets/cor1.png'
 import cor3 from '../assets/cor3.png'
 
-const API_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace('/api', '')
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '')
 
 const FALLBACK_SLIDES = [
   { _id: '1', image: null, _local: cor2, title: 'Smart Hotel Lock Solutions',   subtitle: 'Secure. Reliable. Made in India.' },

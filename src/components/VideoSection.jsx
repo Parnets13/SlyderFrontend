@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from 'react'
 import manV from '../assets/man-v.mp4'
 import lockDemo from '../assets/mvi-4044_KNUKdNTf.mp4'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '')
 
 const FALLBACK = [
   { _id: '1', title: 'Manufacturing Process', _local: manV },
@@ -37,6 +37,7 @@ function VideoCard({ video, src }) {
         <video
           ref={videoRef}
           preload="metadata"
+          controls
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
@@ -51,7 +52,9 @@ function VideoCard({ video, src }) {
         }} />
         <div onClick={toggle} style={{
           position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-          opacity: !playing || hovered ? 1 : 0, transition: 'opacity 0.3s ease', cursor: 'pointer',
+          opacity: playing ? 0 : 1,
+          pointerEvents: playing ? 'none' : 'auto',
+          transition: 'opacity 0.3s ease', cursor: 'pointer',
         }}>
           <div style={{
             width: 60, height: 60, borderRadius: '50%',

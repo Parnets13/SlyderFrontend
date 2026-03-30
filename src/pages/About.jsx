@@ -3,7 +3,7 @@ import { ChevronDown } from 'lucide-react'
 import founderImg from '../assets/founder .jfif'
 import heroBg from '../assets/cor2.jpg'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '')
 
 const sections = [
   { id: 'intro', heading: 'Slyder Electronics — Pioneering Hotel Lock Solutions', content: [{ label: null, text: "Slyder Electronics is a trailblazing company that revolutionized the hospitality industry with its innovative electronic lock solutions. Established in 2006, Slyder Electronics swiftly emerged as a frontrunner in importing and providing cutting-edge hotel locks in India." }] },
