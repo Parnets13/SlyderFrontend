@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { MapPin, Phone, Mail, Globe } from 'lucide-react'
 import heroBg from '../assets/8hotel.jpg'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
 
 const iconAnimations = `
   @keyframes iconPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.22)} }

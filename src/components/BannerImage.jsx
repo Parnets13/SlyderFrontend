@@ -8,7 +8,7 @@ import cor2 from '../assets/cor2.jpg'
 import cor1 from '../assets/cor1.png'
 import cor3 from '../assets/cor3.png'
 
-const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '')
+const API_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace('/api', '')
 
 const FALLBACK_SLIDES = [
   { _id: '1', image: null, _local: cor2, title: 'Smart Hotel Lock Solutions',   subtitle: 'Secure. Reliable. Made in India.' },
@@ -44,7 +44,7 @@ function BannerImage() {
   const animClass = ANIM_CLASSES[activeIndex % ANIM_CLASSES.length]
 
   return (
-    <div className="relative w-full" style={{ height: '100svh', overflow: 'hidden' }}>
+    <div className="relative w-full banner-wrapper" style={{ overflow: 'hidden' }}>
       <Swiper
         modules={[Autoplay, Pagination]}
         onSwiper={(s) => { swiperRef.current = s }}
@@ -59,24 +59,32 @@ function BannerImage() {
           <SwiperSlide key={slide._id}>
             <div className="relative w-full h-full overflow-hidden">
 
-              {/* Background with Ken Burns */}
+              {/* Mobile: fixed height, full image visible */}
+              <img
+                src={imgSrc(slide)}
+                alt={slide.title}
+                className="block md:hidden w-full h-full object-contain banner-zoom"
+                style={{ backgroundColor: '#000' }}
+              />
+
+              {/* Desktop: full-screen background */}
               <div
-                className="absolute inset-0 bg-cover bg-center banner-zoom"
+                className="hidden md:block absolute inset-0 bg-cover bg-center banner-zoom"
                 style={{ backgroundImage: `url(${imgSrc(slide)})` }}
               />
 
               {/* Gradient overlay */}
-              <div className="absolute inset-0" style={{
+              <div className="absolute inset-0 z-10" style={{
                 background: 'linear-gradient(105deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.1) 100%)'
               }} />
 
               {/* Bottom vignette */}
-              <div className="absolute bottom-0 left-0 right-0 h-40" style={{
+              <div className="absolute bottom-0 left-0 right-0 h-40 z-10" style={{
                 background: 'linear-gradient(to top, rgba(0,0,0,0.55), transparent)'
               }} />
 
               {/* Content */}
-              <div className="relative z-10 h-full flex items-center">
+              <div className="absolute inset-0 z-20 flex items-center md:relative md:h-full">
                 <div className="w-full px-6 md:px-20">
                   <div key={animKey} className={`max-w-2xl ${animClass}`}>
                     <h1
@@ -125,6 +133,23 @@ function BannerImage() {
       </button>
 
       <style>{`
+        .banner-wrapper,
+        .banner-wrapper .swiper,
+        .banner-wrapper .swiper-wrapper,
+        .banner-wrapper .swiper-slide {
+          height: 75vw;
+          min-height: 320px;
+          max-height: 560px;
+        }
+        @media (min-width: 768px) {
+          .banner-wrapper,
+          .banner-wrapper .swiper,
+          .banner-wrapper .swiper-wrapper,
+          .banner-wrapper .swiper-slide {
+            height: 100svh;
+            max-height: none;
+          }
+        }
         .banner-zoom {
           animation: kenburns 8s ease-in-out forwards;
         }

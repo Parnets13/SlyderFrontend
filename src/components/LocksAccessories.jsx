@@ -12,7 +12,7 @@ import img8 from '../assets/cor3.png'
 
 const BASE_URL = import.meta.env.VITE_API_URL
   ? import.meta.env.VITE_API_URL.replace(/\/api$/, '')
-  : 'http://localhost:5000'
+  : 'https://slyderind.onrender.com'
 
 const FALLBACK = [
   { _id: '1', name: 'Slyder Hotel Lock', _local: img1, specs: [{ spec: 'Technology', desc: 'RFID & Bluetooth' }, { spec: 'Origin', desc: '100% Made in India' }, { spec: 'Alert System', desc: 'Real-time Transaction Alerts' }, { spec: 'Management', desc: 'Cloud-based Software' }] },
@@ -85,7 +85,6 @@ function LocksAccessories() {
           .product-card-grid { grid-template-columns: 1fr !important; height: auto !important; min-height: unset !important; max-height: unset !important; }
           .product-card-img { height: 220px !important; order: 0 !important; }
           .product-card-content { order: 1 !important; padding: 24px 20px !important; }
-          .product-sticky-wrapper { position: static !important; }
         }
       `}</style>
     </section>

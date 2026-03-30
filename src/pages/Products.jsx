@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import heroBg from '../assets/cor3.png'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace('/api', '')
 const imgSrc = (p) => p.image ? `${BASE_URL}/uploads/featured/${p.image}` : null
 
 const styles = `

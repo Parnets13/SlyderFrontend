@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 import heroBg from '../assets/cor3.png'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
 
 const DEFAULT_SECTIONS = [
   { heading: 'Strengths for Providing Service', body: "Please provide detailed information about your company's strengths that make you an ideal distributor for the Slyder Hotel Lock System." },
