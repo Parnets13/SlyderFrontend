@@ -1,9 +1,10 @@
 import { Play, Pause } from 'lucide-react'
 import { useRef, useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import manV from '../assets/man-v.mp4'
 import lockDemo from '../assets/mvi-4044_KNUKdNTf.mp4'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.in/api').replace(/\/api$/, '')
 
 const FALLBACK = [
   { _id: '1', title: 'Manufacturing Process', _local: manV },
@@ -92,8 +93,16 @@ function VideoSection() {
 
   const srcFor = (v) => v._local ? v._local : `${BASE_URL}/uploads/videos/${v.filename}`
 
+  const h1Text = 'See Slyder In Action'
+  const metaDescription = 'Watch Slyder hotel lock systems in action - Manufacturing process, door lock demos, and product features explained through video demonstrations.'
+
   return (
     <section style={{ background: '#fff', padding: '60px 20px 80px' }}>
+      {/* SEO: H1 and Meta Description */}
+      <Helmet>
+        <meta name="description" content={metaDescription} />
+      </Helmet>
+
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         {/* Header */}
         <div style={{ marginBottom: 40 }}>
@@ -101,12 +110,12 @@ function VideoSection() {
             Watch & Learn
           </p>
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-            <h2 style={{ margin: 0, fontSize: 'clamp(24px, 3.5vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.025em', color: '#0f172a' }}>
+            <h1 style={{ margin: 0, fontSize: 'clamp(24px, 3.5vw, 44px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.025em', color: '#0f172a' }}>
               See Slyder{' '}
               <span style={{ background: 'linear-gradient(90deg, #159c48, #22c55e)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 In Action
               </span>
-            </h2>
+            </h1>
             
           </div>
         </div>

@@ -5,7 +5,7 @@ import hotel8 from '../assets/8hotel.jpg'
 import hotel9 from '../assets/9hotel.jpg'
 import hotel11 from '../assets/11hotel.jpg'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.in/api').replace(/\/api$/, '')
 
 const FALLBACK = [
   { _id: '1', _local: hotel4 },

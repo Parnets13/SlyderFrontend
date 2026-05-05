@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Plus, Pencil, Trash2, X, Check, ImageIcon, Star } from 'lucide-react'
 import { getStarClients, createStarClient, updateStarClient, deleteStarClient } from '../api'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.in/api').replace(/\/api$/, '')
 const imgSrc = (filename) => `${BASE_URL}/uploads/star-clients/${filename}`
 
 function Modal({ title, file, setFile, preview, setPreview, onSubmit, onClose, error, submitting }) {

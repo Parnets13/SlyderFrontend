@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { MapPin, Phone, Mail, Globe } from 'lucide-react'
 import heroBg from '../assets/8hotel.jpg'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.in/api').replace(/\/api$/, '')
 
 const iconAnimations = `
   @keyframes iconPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.22)} }
@@ -32,6 +33,7 @@ function ContactInfoItem({ icon: Icon, label, lines, animation }) {
 const BLANK = { name: '', email: '', mobile: '', subject: '', message: '' }
 
 function Contact() {
+  const navigate = useNavigate()
   const [info, setInfo] = useState(null)
   const [form, setForm] = useState(BLANK)
   const [status, setStatus] = useState(null)
@@ -69,7 +71,7 @@ function Contact() {
       })
       clearTimeout(timeout)
       const data = await res.json()
-      if (data.success) { setStatus('success'); setForm(BLANK) } else setStatus('error')
+      if (data.success) { navigate('/thank-you') } else setStatus('error')
     } catch { setStatus('error') }
   }
 
@@ -98,11 +100,6 @@ function Contact() {
             <h2 style={{ margin: '0 0 8px', fontSize: 'clamp(20px, 2vw, 26px)', fontWeight: 800, color: '#0f172a', fontFamily: "'Inter', sans-serif" }}>Send Us a Message</h2>
             <div style={{ width: 48, height: 3, background: '#159c48', borderRadius: 2, marginBottom: 28 }} />
 
-            {status === 'success' && (
-              <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', color: '#166534', borderRadius: 10, padding: '12px 16px', marginBottom: 20, fontSize: 14, fontFamily: "'Inter', sans-serif" }}>
-                ✓ Message sent! We'll get back to you soon.
-              </div>
-            )}
             {status === 'error' && (
               <div style={{ background: '#fef2f2', border: '1px solid #fecaca', color: '#991b1b', borderRadius: 10, padding: '12px 16px', marginBottom: 20, fontSize: 14, fontFamily: "'Inter', sans-serif" }}>
                 Something went wrong. Please try again.

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api',
+  baseURL: import.meta.env.VITE_API_URL || 'https://slyderind.in/api',
 })
 
 api.interceptors.request.use((config) => {
@@ -75,7 +75,7 @@ export const deleteDistributorApp           = (id)   => api.delete(`/become-dist
 export const getProjects   = ()   => api.get('/projects').then(r => r.data)
 export const createProject = (fd) => {
   const token = localStorage.getItem('slyder_admin_token')
-  return axios.post(`${import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api'}/projects`, fd, {
+  return axios.post(`${import.meta.env.VITE_API_URL || 'https://slyderind.in/api'}/projects`, fd, {
     headers: { Authorization: `Bearer ${token}` }
   }).then(r => r.data)
 }
@@ -85,7 +85,7 @@ export const deleteProject = (id) => api.delete(`/projects/${id}`).then(r => r.d
 export const getDistributor    = ()   => api.get('/distributor').then(r => r.data)
 export const updateDistributor = (fd) => {
   const token = localStorage.getItem('slyder_admin_token')
-  return axios.put(`${import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api'}/distributor`, fd, {
+  return axios.put(`${import.meta.env.VITE_API_URL || 'https://slyderind.in/api'}/distributor`, fd, {
     headers: { Authorization: `Bearer ${token}` }
   }).then(r => r.data)
 }
@@ -97,7 +97,7 @@ export const deleteAboutSection = (id)       => api.delete(`/about/sections/${id
 export const getAboutFounder   = ()   => api.get('/about/founder').then(r => r.data)
 export const updateAboutFounder= (fd) => {
   const token = localStorage.getItem('slyder_admin_token')
-  return axios.put(`${import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api'}/about/founder`, fd, {
+  return axios.put(`${import.meta.env.VITE_API_URL || 'https://slyderind.in/api'}/about/founder`, fd, {
     headers: { Authorization: `Bearer ${token}` }
   }).then(r => r.data)
 }

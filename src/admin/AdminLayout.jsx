@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
-import { LayoutDashboard, Package, MessageSquare, Megaphone, Phone, PhoneCall, Image, Layers, Video, Building2, Star, FileText, MapPin, Images, UserPlus, ClipboardList, LogOut, Menu, X } from 'lucide-react'
+import { LayoutDashboard, Package, MessageSquare, Megaphone, Phone, PhoneCall, Image, Layers, Video, Building2, Star, FileText, MapPin, Images, UserPlus, ClipboardList, LogOut, Menu, X, Award, HelpCircle, BookOpen, Briefcase } from 'lucide-react'
 import { apiLogout, isAuthenticated } from './api'
 import logo from '../assets/logo.jpeg'
 
@@ -11,6 +11,10 @@ const navItems = [
   { label: 'Videos',             icon: Video,           path: '/admin/videos' },
   { label: 'Hotels / Clients',   icon: Building2,       path: '/admin/hotels' },
   { label: 'Star Clients',        icon: Star,            path: '/admin/star-clients' },
+  { label: 'Why Choose Us',      icon: Award,           path: '/admin/why-choose-us' },
+  { label: 'FAQ',                icon: HelpCircle,      path: '/admin/faq' },
+  { label: 'Blog',               icon: BookOpen,        path: '/admin/blog' },
+  { label: 'Case Studies',       icon: Briefcase,       path: '/admin/case-studies' },
   { label: 'About Page',         icon: FileText,        path: '/admin/about' },
   { label: 'About Slyder',       icon: FileText,        path: '/admin/about-slyder' },
   { label: 'Distributor Network',     icon: MapPin,          path: '/admin/distributor' },

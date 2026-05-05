@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Plus, Pencil, Trash2, X, Check, ImageIcon } from 'lucide-react'
 import { getBanners, createBanner, updateBanner, deleteBanner } from '../api'
 
-const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'https://slyderind.onrender.com'
+const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'https://slyderind.in'
 const imgSrc = (filename) => `${API_URL}/uploads/banners/${filename}`
 
 const BLANK = { title: '', subtitle: '' }

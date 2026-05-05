@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper/modules'
 import 'swiper/css'
@@ -8,7 +9,7 @@ import cor2 from '../assets/cor2.jpg'
 import cor1 from '../assets/cor1.png'
 import cor3 from '../assets/cor3.png'
 
-const API_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace('/api', '')
+const API_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.in/api').replace('/api', '')
 
 const FALLBACK_SLIDES = [
   { _id: '1', image: null, _local: cor2, title: 'Smart Hotel Lock Solutions',   subtitle: 'Secure. Reliable. Made in India.' },
@@ -45,6 +46,11 @@ function BannerImage() {
 
   return (
     <div className="relative w-full banner-wrapper" style={{ overflow: 'hidden' }}>
+      {/* SEO: Dynamic Meta Description */}
+      <Helmet>
+        <meta name="description" content={slides[activeIndex]?.subtitle || 'Smart Hotel Lock Solutions - Secure, Reliable, Made in India'} />
+      </Helmet>
+
       <Swiper
         modules={[Autoplay, Pagination]}
         onSwiper={(s) => { swiperRef.current = s }}
@@ -59,17 +65,9 @@ function BannerImage() {
           <SwiperSlide key={slide._id}>
             <div className="relative w-full h-full overflow-hidden">
 
-              {/* Mobile: fixed height, full image visible */}
-              <img
-                src={imgSrc(slide)}
-                alt={slide.title}
-                className="block md:hidden w-full h-full object-contain banner-zoom"
-                style={{ backgroundColor: '#000' }}
-              />
-
-              {/* Desktop: full-screen background */}
+              {/* Full-screen background for all screen sizes */}
               <div
-                className="hidden md:block absolute inset-0 bg-cover bg-center banner-zoom"
+                className="absolute inset-0 bg-cover bg-center banner-zoom"
                 style={{ backgroundImage: `url(${imgSrc(slide)})` }}
               />
 
@@ -84,9 +82,10 @@ function BannerImage() {
               }} />
 
               {/* Content */}
-              <div className="absolute inset-0 z-20 flex items-center md:relative md:h-full">
+              <div className="absolute inset-0 z-20 flex items-center">
                 <div className="w-full px-6 md:px-20">
                   <div key={animKey} className={`max-w-2xl ${animClass}`}>
+                    {/* SEO: H1 Tag */}
                     <h1
                       className="text-3xl sm:text-5xl md:text-7xl font-black text-white leading-[1.05] mb-4 md:mb-6"
                       style={{ textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}
@@ -94,6 +93,7 @@ function BannerImage() {
                       {slide.title}
                     </h1>
                     <div className="w-14 md:w-20 h-1.5 rounded-full bg-[#159c48] mb-4 md:mb-6" />
+                    {/* SEO: Meta Description (displayed as subtitle) */}
                     <p className="text-sm sm:text-base md:text-xl text-white/80 leading-relaxed font-medium max-w-sm md:max-w-none">
                       {slide.subtitle}
                     </p>
@@ -137,18 +137,9 @@ function BannerImage() {
         .banner-wrapper .swiper,
         .banner-wrapper .swiper-wrapper,
         .banner-wrapper .swiper-slide {
-          height: 75vw;
-          min-height: 320px;
-          max-height: 560px;
-        }
-        @media (min-width: 768px) {
-          .banner-wrapper,
-          .banner-wrapper .swiper,
-          .banner-wrapper .swiper-wrapper,
-          .banner-wrapper .swiper-slide {
-            height: 100svh;
-            max-height: none;
-          }
+          height: 100svh;
+          min-height: 0;
+          max-height: none;
         }
         .banner-zoom {
           animation: kenburns 8s ease-in-out forwards;

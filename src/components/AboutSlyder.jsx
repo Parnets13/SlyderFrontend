@@ -60,7 +60,7 @@ function StatCard({ s, i, started }) {
   )
 }
 
-const API_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api')
+const API_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.in/api')
 
 const DEFAULTS = {
   heading: 'Welcome To',

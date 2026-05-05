@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.in/api').replace(/\/api$/, '')
 
 const FALLBACK = [
   {
@@ -106,6 +107,9 @@ function Testimonial() {
 
   const t = items[active]
 
+  const h1Text = 'What Our Clients Say'
+  const metaDescription = 'Read testimonials from leading hotels across India who trust Slyder for their security needs - Real reviews from satisfied customers about our hotel lock systems.'
+
   return (
     <section style={{
       padding: '100px 24px',
@@ -113,6 +117,25 @@ function Testimonial() {
       position: 'relative',
       overflow: 'hidden',
     }}>
+      {/* SEO: H1 and Meta Description */}
+      <Helmet>
+        <meta name="description" content={metaDescription} />
+      </Helmet>
+
+      {/* Visually hidden H1 for SEO */}
+      <h1 style={{
+        position: 'absolute',
+        width: '1px',
+        height: '1px',
+        padding: 0,
+        margin: '-1px',
+        overflow: 'hidden',
+        clip: 'rect(0, 0, 0, 0)',
+        whiteSpace: 'nowrap',
+        borderWidth: 0,
+      }}>
+        {h1Text}
+      </h1>
 
       {/* Background blobs */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import heroBg from '../assets/11hotel.jpg'
 import indiaMap from '../assets/India Map.jfif'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.in/api').replace(/\/api$/, '')
 
 function DistributorNetwork() {
   const [data, setData] = useState(null)

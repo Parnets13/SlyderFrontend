@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { ArrowRight } from 'lucide-react'
 
 import img1 from '../assets/pr1.png'
@@ -12,7 +13,7 @@ import img8 from '../assets/cor3.png'
 
 const BASE_URL = import.meta.env.VITE_API_URL
   ? import.meta.env.VITE_API_URL.replace(/\/api$/, '')
-  : 'https://slyderind.onrender.com'
+  : 'https://slyderind.in'
 
 const FALLBACK = [
   { _id: '1', name: 'Slyder Hotel Lock', _local: img1, specs: [{ spec: 'Technology', desc: 'RFID & Bluetooth' }, { spec: 'Origin', desc: '100% Made in India' }, { spec: 'Alert System', desc: 'Real-time Transaction Alerts' }, { spec: 'Management', desc: 'Cloud-based Software' }] },
@@ -44,17 +45,25 @@ function LocksAccessories() {
 
   const imgSrc = (p) => p._local ? p._local : `${BASE_URL}/uploads/featured/${p.image}`
 
+  const h1Text = 'Locks & Accessories'
+  const metaDescription = 'Premium hotel security solutions — engineered & manufactured in India. Slyder Hotel Lock, RFID Reader, Lock Management Software, and more.'
+
   return (
     <section style={{ background: '#f1f5f9', padding: '60px 0 80px' }}>
+      {/* SEO: H1 and Meta Description */}
+      <Helmet>
+        <meta name="description" content={metaDescription} />
+      </Helmet>
+
       {/* Header */}
       <div style={{ width: '90%', margin: '0 auto', paddingBottom: 40 }}>
         <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#159c48' }}>
           Our Products
         </p>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
-          <h2 style={{ margin: 0, fontSize: 'clamp(26px, 3vw, 48px)', fontWeight: 900, color: '#0f172a', letterSpacing: '-0.025em', lineHeight: 1.1 }}>
-            Locks &amp; Accessories
-          </h2>
+          <h1 style={{ margin: 0, fontSize: 'clamp(26px, 3vw, 48px)', fontWeight: 900, color: '#0f172a', letterSpacing: '-0.025em', lineHeight: 1.1 }}>
+            {h1Text}
+          </h1>
           <a href="/products" style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: '12px 28px', borderRadius: 100,

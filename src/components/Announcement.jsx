@@ -1,3 +1,5 @@
+import { Helmet } from 'react-helmet-async'
+
 const tickerItems = [
   '🇮🇳 Indian Hospitality Takes the Lead',
   '❖',
@@ -16,8 +18,19 @@ const tickerItems = [
 const tickerText = tickerItems.join('     ')
 
 function Announcement() {
+  const h1Text = '🇮🇳 Indian Hospitality Takes the Lead'
+  const metaDescription = 'Slyder Launches Hotel Lock System with 100% Made in India RFID Reader & Indigenous Software - Industry-First Transaction Alert Feature'
+
   return (
     <div className="announcement-root">
+      {/* SEO: H1 and Meta Description */}
+      <Helmet>
+        <meta name="description" content={metaDescription} />
+      </Helmet>
+
+      {/* Visually hidden H1 for SEO */}
+      <h1 className="sr-only">{h1Text}</h1>
+
       <div className="announcement-track">
         <div className="announcement-inner">
           <span className="announcement-text">{tickerText}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -26,6 +39,18 @@ function Announcement() {
       </div>
 
       <style>{`
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border-width: 0;
+        }
+
         .announcement-root {
           position: relative;
           width: 100%;

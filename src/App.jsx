@@ -124,6 +124,7 @@ import VideoSection from './components/VideoSection'
 import HotelsSection from './components/HotelsSection'
 import StarClients from './components/StarClients'
 import Testimonial from './components/Testimonial'
+import WhyChooseUs from './components/WhyChooseUs'
 
 // Pages
 import About from './pages/About'
@@ -133,6 +134,12 @@ import Contact from './pages/Contact'
 import Projects from './pages/Projects'
 import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
+import FAQ from './pages/FAQ'
+import Blog from './pages/Blog'
+import BlogDetail from './pages/BlogDetail'
+import ThankYou from './pages/ThankYou'
+import CaseStudies from './pages/CaseStudies'
+import CaseStudyDetail from './pages/CaseStudyDetail'
 
 // Admin
 import AdminLogin from './admin/AdminLogin'
@@ -155,6 +162,10 @@ import AdminProjects from './admin/pages/AdminProjects'
 import AdminBecomeDistributorContent from './admin/pages/AdminBecomeDistributorContent'
 import AdminBecomeDistributorApps from './admin/pages/AdminBecomeDistributorApps'
 import AdminStarClients from './admin/pages/AdminStarClients'
+import AdminWhyChooseUs from './admin/pages/AdminWhyChooseUs'
+import AdminFAQ from './admin/pages/AdminFAQ'
+import AdminBlog from './admin/pages/AdminBlog'
+import AdminCaseStudies from './admin/pages/AdminCaseStudies'
 
 function HomePage() {
   return (
@@ -163,9 +174,10 @@ function HomePage() {
       <Announcement />
       <HotelsSection />
       <LocksAccessories />
+      <WhyChooseUs />
       <AboutSlyder />
       <VideoSection />
-      {/* <StarClients /> */}
+
       
       <Testimonial />
     </>
@@ -199,6 +211,12 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:slug" element={<ProductDetail />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogDetail />} />
+        <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/case-studies" element={<CaseStudies />} />
+        <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
 
         {/* Admin */}
         <Route path="/admin" element={<AdminLogin />} />
@@ -221,6 +239,10 @@ function App() {
         <Route path="/admin/distributor-apps" element={<AdminLayout><AdminBecomeDistributorApps /></AdminLayout>} />
         <Route path="/admin/projects" element={<AdminLayout><AdminProjects /></AdminLayout>} />
         <Route path="/admin/star-clients" element={<AdminLayout><AdminStarClients /></AdminLayout>} />
+        <Route path="/admin/why-choose-us" element={<AdminLayout><AdminWhyChooseUs /></AdminLayout>} />
+        <Route path="/admin/faq" element={<AdminLayout><AdminFAQ /></AdminLayout>} />
+        <Route path="/admin/blog" element={<AdminLayout><AdminBlog /></AdminLayout>} />
+        <Route path="/admin/case-studies" element={<AdminLayout><AdminCaseStudies /></AdminLayout>} />
       </Routes>
 
       {!isAdmin && <Footer />}

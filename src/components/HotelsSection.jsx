@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import hotel4 from '../assets/4hotel.jpg'
 import hotel7 from '../assets/7hotel.jpg'
 import hotel8 from '../assets/8hotel.jpg'
 import hotel9 from '../assets/9hotel.jpg'
 import hotel11 from '../assets/11hotel.jpg'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace(/\/api$/, '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.in/api').replace(/\/api$/, '')
 
 const FALLBACK = [
   { _id: '1', _local: hotel4 },
@@ -30,8 +31,16 @@ function HotelsSection() {
   // Duplicate for seamless infinite scroll
   const track = [...hotels, ...hotels, ...hotels]
 
+  const h1Text = 'Leading Hotels Trust Slyder Lock Systems'
+  const metaDescription = 'Leading hotels across India trust Slyder for their security needs - Approved by top hospitality brands'
+
   return (
     <section className="py-16 px-4 overflow-hidden" style={{ background: '#f8fafc' }}>
+      {/* SEO: H1 and Meta Description */}
+      <Helmet>
+        <meta name="description" content={metaDescription} />
+      </Helmet>
+
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
@@ -42,16 +51,16 @@ function HotelsSection() {
           >
             Our Clients
           </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">
             Approved by{' '}
             <span style={{
               background: 'linear-gradient(135deg, #159c48, #4ade80)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             }}>
-         
+              {h1Text}
             </span>
-          </h2>
+          </h1>
           <div className="w-14 h-1 rounded-full mx-auto mt-4" style={{ backgroundColor: '#159c48' }} />
           <p className="text-gray-500 mt-4 text-base max-w-md mx-auto">
             Leading hotels across India trust Slyder for their security needs.

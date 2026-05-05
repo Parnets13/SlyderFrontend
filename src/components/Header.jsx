@@ -7,7 +7,7 @@ import brochureImg from '../assets/Brochure.png'
 import templateImg from '../assets/template.jpeg'
 import slyder from '../assets/7.png'
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.onrender.com/api').replace('/api', '')
+const BASE_URL = (import.meta.env.VITE_API_URL || 'https://slyderind.in/api').replace('/api', '')
 
 const downloadItems = [
   { label: 'Battery', href: batteryImg, filename: 'Battery.jpeg' },
@@ -18,15 +18,16 @@ const downloadItems = [
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Our Products', href: '/products', hasDropdown: true, dropdownType: 'products' },
-   { label: 'Projects', href: '/projects' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Case Studies', href: '/case-studies' },
   { label: 'About Us', href: '/about' },
   { label: 'Contact', href: '/contact' },
-   { label: 'Download', href: '/download', hasDropdown: true, dropdownType: 'download' }, 
-   {
-  label: 'Distributor',
-  hasDropdown: true,
-  dropdownType: 'distributor'
-},
+  { label: 'Download', href: '/download', hasDropdown: true, dropdownType: 'download' }, 
+  {
+    label: 'Distributor',
+    hasDropdown: true,
+    dropdownType: 'distributor'
+  },
   //  { label: 'Become Distributor', href: '/become-distributor' },
   // { label: 'Distributor Network', href: '/distributors' },
   
@@ -147,6 +148,20 @@ const DistributorDropdown = ({ isOpen }) => {
         >
           Distributor Network
         </Link>
+
+        <Link
+          to="/faq"
+          className="block px-5 py-3 text-sm font-medium text-white/85 hover:bg-white/10"
+        >
+          FAQ
+        </Link>
+
+        <Link
+          to="/blog"
+          className="block px-5 py-3 text-sm font-medium text-white/85 hover:bg-white/10"
+        >
+          Blog
+        </Link>
       </div>
     </div>
   )
@@ -201,6 +216,40 @@ const MobileNavItem = ({ link, productItems, downloadItems, onLinkClick }) => {
                 {item.label}
               </a>
             ))}
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  if (link.hasDropdown && link.dropdownType === 'distributor') {
+    return (
+      <div style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 0', color: 'rgba(255,255,255,0.85)', fontSize: 15, fontWeight: 700 }}
+        >
+          <span>{link.label}</span>
+          <ChevronDown size={16} color="rgba(255,255,255,0.5)" style={{ transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+        </button>
+        {isOpen && (
+          <div style={{ paddingBottom: 8, display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <Link to="/become-distributor" onClick={onLinkClick}
+              style={{ display: 'flex', alignItems: 'center', padding: '10px 12px', borderRadius: 10, textDecoration: 'none', background: 'rgba(255,255,255,0.05)', marginBottom: 2, fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.8)' }}>
+              Become Distributor
+            </Link>
+            <Link to="/distributors" onClick={onLinkClick}
+              style={{ display: 'flex', alignItems: 'center', padding: '10px 12px', borderRadius: 10, textDecoration: 'none', background: 'rgba(255,255,255,0.05)', marginBottom: 2, fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.8)' }}>
+              Distributor Network
+            </Link>
+            <Link to="/faq" onClick={onLinkClick}
+              style={{ display: 'flex', alignItems: 'center', padding: '10px 12px', borderRadius: 10, textDecoration: 'none', background: 'rgba(255,255,255,0.05)', marginBottom: 2, fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.8)' }}>
+              FAQ
+            </Link>
+            <Link to="/blog" onClick={onLinkClick}
+              style={{ display: 'flex', alignItems: 'center', padding: '10px 12px', borderRadius: 10, textDecoration: 'none', background: 'rgba(255,255,255,0.05)', marginBottom: 2, fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.8)' }}>
+              Blog
+            </Link>
           </div>
         )}
       </div>
@@ -300,7 +349,7 @@ const handleDistributorLeave = useCallback(() => {
       <div className="w-full px-4 md:px-6 lg:px-10">
         <div className="flex items-center h-16 md:h-24 gap-4 md:gap-6">
 
-          {/* Logo - always visible */}
+          {/* Logo + SEO H1 & meta description */}
           <div className="shrink-0">
             <a href="/">
               <img
